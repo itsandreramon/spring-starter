@@ -1,0 +1,31 @@
+[versions]
+testcontainers = '1.19.3'
+netflix-dgs = '8.2.0'
+pinterest-ktlint = '1.1.0'
+kotest = "5.8.0"
+mockk = "1.13.8"
+
+[libraries]
+spring-webflux = { module = "org.springframework.boot:spring-boot-starter-webflux" }
+spring-mongo = { module = "org.springframework.boot:spring-boot-starter-data-mongodb-reactive" }
+spring-test = { module = "org.springframework.boot:spring-boot-starter-test" }
+
+reactor-test = { module = "io.projectreactor:reactor-test" }
+reactor-kotlin = { module = "io.projectreactor.kotlin:reactor-kotlin-extensions" }
+
+testcontainers-bom = { module = "org.testcontainers:testcontainers-bom", version.ref = "testcontainers" }
+testcontainers-junit = { module = "org.testcontainers:junit-jupiter" }
+testcontainers-mongo = { module = "org.testcontainers:mongodb" }
+
+netflix-dgs-bom = { module = "com.netflix.graphql.dgs:graphql-dgs-platform-dependencies", version.ref = "netflix_dgs" }
+netflix-dgs-starter = { module = "com.netflix.graphql.dgs:graphql-dgs-webflux-starter" }
+
+kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8" }
+kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect" }
+
+kotlinx-coroutines-reactor = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-reactor" }
+
+pinterest-ktlint = { module = "com.pinterest.ktlint:ktlint-cli", version.ref = "pinterest-ktlint" }
+
+kotest-assertions = { module = "io.kotest:kotest-assertions-core", version.ref = "kotest" }
+mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
