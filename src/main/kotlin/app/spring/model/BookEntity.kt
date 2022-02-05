@@ -9,13 +9,13 @@ import java.util.UUID
 @Document(collection = "books")
 data class BookEntity(
 
-	@Id   
-	val uuid: String = UUID.randomUUID().toString(),
+    @Id
+    val uuid: String = UUID.randomUUID().toString(),
 
-	@Indexed   
-	val title: String,
+    @Indexed
+    val title: String,
 
-	val author: String,
+    val author: String,
 
-	val created: String = Instant.now().toString(),
+    val created: String = Instant.now().toString(),
 )

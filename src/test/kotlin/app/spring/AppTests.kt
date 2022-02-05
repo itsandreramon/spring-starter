@@ -23,51 +23,51 @@ import reactor.test.StepVerifier
 @ComponentScan
 @EnableAutoConfiguration
 @SpringBootTest(
-	webEnvironment = RANDOM_PORT,
-	classes = [
-		DgsAutoConfiguration::class,
-		BookFetcher::class,
-	]
+    webEnvironment = RANDOM_PORT,
+    classes = [
+        DgsAutoConfiguration::class,
+        BookFetcher::class,
+    ]
 )
 @Testcontainers
 class AppTests {
 
-	@Autowired lateinit var queryExecutor: DgsReactiveQueryExecutor
+    @Autowired lateinit var queryExecutor: DgsReactiveQueryExecutor
 
-	@Test
-	fun test_save_book() {
-		val input = BookInput.newBuilder()
-			.title("Harry Potter and the Philosopher's Stone")
-			.author("J. K. Rowling")
-			.build()
+    @Test
+    fun test_save_book() {
+        val input = BookInput.newBuilder()
+            .title("Harry Potter and the Philosopher's Stone")
+            .author("J. K. Rowling")
+            .build()
 
-		val request = GraphQLQueryRequest(
-			query = SaveBookGraphQLQuery.Builder()
-				.book(input)
-				.build(),
-			projection = SaveBookProjectionRoot()
-				.title()
-		)
+        val request = GraphQLQueryRequest(
+            query = SaveBookGraphQLQuery.Builder()
+                .book(input)
+                .build(),
+            projection = SaveBookProjectionRoot()
+                .title()
+        )
 
-		val response = queryExecutor.executeAndExtractJsonPath<String>(
-			request.serialize(),
-			"data.saveBook.title"
-		)
+        val response = queryExecutor.executeAndExtractJsonPath<String>(
+            request.serialize(),
+            "data.saveBook.title"
+        )
 
-		StepVerifier.create(response)
-			.expectNext("Harry Potter and the Philosopher's Stone")
-			.verifyComplete()
-	}
+        StepVerifier.create(response)
+            .expectNext("Harry Potter and the Philosopher's Stone")
+            .verifyComplete()
+    }
 
-	companion object {
+    companion object {
 
-		@Container
-		val mongo: MongoDBContainer = MongoDBContainer("mongo")
+        @Container
+        val mongo: MongoDBContainer = MongoDBContainer("mongo")
 
-		@JvmStatic
-		@DynamicPropertySource
-		fun properties(registry: DynamicPropertyRegistry) {
-			registry.add("spring.data.mongodb.uri", mongo::getReplicaSetUrl)
-		}
-	}
+        @JvmStatic
+        @DynamicPropertySource
+        fun properties(registry: DynamicPropertyRegistry) {
+            registry.add("spring.data.mongodb.uri", mongo::getReplicaSetUrl)
+        }
+    }
 }

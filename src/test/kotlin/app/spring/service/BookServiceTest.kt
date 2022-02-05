@@ -14,54 +14,54 @@ import reactor.test.StepVerifier
 
 class BookServiceTest {
 
-	private val bookRepository = mockk<BookRepository>()
-	private var bookService: BookService? = null
+    private val bookRepository = mockk<BookRepository>()
+    private var bookService: BookService? = null
 
-	@BeforeEach
-	fun setUp() {
-		bookService = BookServiceImpl(bookRepository)
-	}
+    @BeforeEach
+    fun setUp() {
+        bookService = BookServiceImpl(bookRepository)
+    }
 
-	@AfterEach
-	fun tearDown() {
-		bookService = null
-	}
+    @AfterEach
+    fun tearDown() {
+        bookService = null
+    }
 
-	@Test
-	fun test_entity_conversion() {
-		val created = "2022-01-21T14:48:19.374212Z"
-		val uuid = "eefc96ef-00b1-4a5a-9e7f-489691d04e09"
+    @Test
+    fun test_entity_conversion() {
+        val created = "2022-01-21T14:48:19.374212Z"
+        val uuid = "eefc96ef-00b1-4a5a-9e7f-489691d04e09"
 
-		val inputTitle = "Example Title"
-		val inputAuthor = "Example Author"
+        val inputTitle = "Example Title"
+        val inputAuthor = "Example Author"
 
-		val input = BookInput.newBuilder()
-			.author(inputAuthor)
-			.title(inputAuthor)
-			.build()
+        val input = BookInput.newBuilder()
+            .author(inputAuthor)
+            .title(inputAuthor)
+            .build()
 
-		every {
-			bookRepository.save(any())
-		} returns Mono.just(
-			BookEntity(
-				title = inputTitle,
-				author = inputAuthor,
-				uuid = uuid,
-				created = created,
-			)
-		)
+        every {
+            bookRepository.save(any())
+        } returns Mono.just(
+            BookEntity(
+                title = inputTitle,
+                author = inputAuthor,
+                uuid = uuid,
+                created = created,
+            )
+        )
 
-		val expected = Book.newBuilder()
-			.author(inputAuthor)
-			.title(inputTitle)
-			.uuid(uuid)
-			.created(created)
-			.build()
+        val expected = Book.newBuilder()
+            .author(inputAuthor)
+            .title(inputTitle)
+            .uuid(uuid)
+            .created(created)
+            .build()
 
-		val book = bookService!!.save(input)
+        val book = bookService!!.save(input)
 
-		StepVerifier.create(book)
-			.expectNext(expected)
-			.verifyComplete()
-	}
+        StepVerifier.create(book)
+            .expectNext(expected)
+            .verifyComplete()
+    }
 }

@@ -12,10 +12,6 @@ type Mutation {
     saveBook(book: BookInput!): Book!
 }
 
-type Subscription {
-    numbers: Int!
-}
-
 type Book {
     uuid: String!
     author: String!
