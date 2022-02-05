@@ -25,6 +25,9 @@ jobs:
         with:
           gradle-version: wrapper
 
+      - name: Run lint
+        run: ./gradlew ktlintCheck
+
       - name: Build with Gradle
         run: ./gradlew test bootJar --scan --stacktrace
 
