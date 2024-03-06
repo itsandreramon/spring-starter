@@ -1,5 +1,5 @@
 [versions]
-testcontainers = '1.19.3'
+testcontainers = '1.19.7'
 netflix-dgs = '8.2.0'
 pinterest-ktlint = '1.1.0'
 kotest = "5.8.0"
