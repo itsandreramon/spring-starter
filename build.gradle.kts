@@ -7,7 +7,7 @@ plugins {
     id("org.springframework.boot") version "3.2.1"
     id("com.netflix.dgs.codegen") version "6.1.1"
     kotlin("jvm") version "1.9.21"
-    kotlin("plugin.spring") version "1.9.21"
+    kotlin("plugin.spring") version "1.9.23"
     kotlin("plugin.serialization") version "1.9.21"
 }
 
